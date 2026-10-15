@@ -1,11 +1,12 @@
+import Link from "next/link";
 import type { FC, ReactNode } from "react";
-import { ArrowUpRight, Keyboard } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Keyboard } from "lucide-react";
 import { RevelarAoRolar } from "@/components/animacao/revelar-ao-rolar";
 import { IconeServico } from "@/components/marca/icone-servico";
 import { CabecalhoSecao } from "@/components/site/cabecalho-secao";
 import { TiltCard } from "@/components/spell/tilt-card";
 import { linkWhatsApp } from "@/lib/loja";
-import { mensagemDoServico, servicos, type Servico } from "@/lib/servicos";
+import { caminhoDoServico, mensagemDoServico, servicos, type Servico, type SlugServico } from "@/lib/servicos";
 import { cn } from "@/lib/utils";
 
 const MENSAGEM_LOJA = "Olá! Vim pelo site e quero saber sobre periféricos e kits de upgrade.";
@@ -13,7 +14,7 @@ const MENSAGEM_LOJA = "Olá! Vim pelo site e quero saber sobre periféricos e ki
 // Grade em 4 colunas no desktop: o reparo em placa (o diferencial) ocupa duas,
 // no palco azul-marinho; Software e TI e a Loja fecham a última linha com duas
 // cada. Os cartões usam o tilt-card do Spell UI.
-const LARGOS: readonly Servico["slug"][] = ["reparo-em-placa", "software-e-ti"];
+const LARGOS: readonly SlugServico[] = ["reparo-em-placa", "software-e-ti"];
 
 export const SecaoServicos: FC = () => {
   return (
@@ -38,7 +39,7 @@ export const SecaoServicos: FC = () => {
 };
 
 type CartaoServicoProps = {
-  servico: Servico;
+  servico: Servico & { slug: SlugServico };
   largo: boolean;
 };
 
@@ -48,7 +49,16 @@ const CartaoServico: FC<CartaoServicoProps> = ({ servico, largo }) => {
       <IconeServico icone={servico.icone} className="size-8 text-link" />
       <h3 className="mt-8 text-xl font-bold tracking-tight">{servico.titulo}</h3>
       <p className="mt-2 text-muted-foreground">{servico.resumo}</p>
-      <LinkOrcamento href={linkWhatsApp(mensagemDoServico(servico.assunto))} assunto={servico.titulo} />
+      <div className="mt-auto flex flex-wrap gap-x-6 gap-y-2 pt-6">
+        <Link
+          href={caminhoDoServico(servico.slug)}
+          className="inline-flex items-center gap-1 rounded-full font-semibold text-link outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          Ver detalhes<span className="sr-only"> de {servico.titulo}</span>
+          <ArrowRight aria-hidden="true" className="size-4" />
+        </Link>
+        <LinkOrcamento href={linkWhatsApp(mensagemDoServico(servico.assunto))} assunto={servico.titulo} />
+      </div>
     </Cartao>
   );
 };
@@ -59,7 +69,9 @@ const CartaoLoja: FC = () => {
       <Keyboard aria-hidden="true" className="size-8 text-link" />
       <h3 className="mt-8 text-xl font-bold tracking-tight">Loja de informática</h3>
       <p className="mt-2 text-muted-foreground">Periféricos para notebook e desktop e kits de upgrade.</p>
-      <LinkOrcamento href={linkWhatsApp(MENSAGEM_LOJA)} assunto="Loja de informática" texto="Perguntar" />
+      <div className="mt-auto pt-6">
+        <LinkOrcamento href={linkWhatsApp(MENSAGEM_LOJA)} assunto="Loja de informática" texto="Perguntar" />
+      </div>
     </Cartao>
   );
 };
@@ -98,7 +110,7 @@ const LinkOrcamento: FC<LinkOrcamentoProps> = ({ href, assunto, texto = "Pedir o
       href={href}
       target="_blank"
       rel="noopener"
-      className="mt-auto inline-flex items-center gap-1 self-start rounded-full pt-6 font-semibold text-link outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+      className="inline-flex items-center gap-1 rounded-full font-semibold text-link outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring"
     >
       {texto}
       <span className="sr-only"> de {assunto}</span>

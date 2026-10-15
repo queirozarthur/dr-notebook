@@ -152,6 +152,33 @@ chamada final (palco) → rodapé. Claro para ler, palco azul-marinho para o 3D.
   mantém o WhatsApp a um toque (o cabeçalho do celular não é fixo). Some do `lg`
   para cima, onde o cabeçalho fixo já tem o botão.
 
+## Páginas de serviço
+
+`/servicos/<slug>/`, uma por serviço de `src/lib/servicos.ts` (8 páginas,
+geradas no build; outro endereço dá 404). O título (H1) leva "Maceió", para as
+buscas locais em que a loja não aparece hoje ("conserto drone maceió",
+"conserto ps5 maceió"). Cada página tem título e descrição próprios, a lista do
+que é feito, as marcas, o passo a passo e links para os outros serviços. As de
+drone e de reparo em placa usam a cena 3D (`animacao="entrada"`, porque estão no
+topo); as outras, o ícone do serviço.
+
+## SEO e compartilhamento
+
+- **`SITE_URL`** (copie `.env.example` para `.env`): o endereço público do site.
+  O build usa nas URLs absolutas da imagem de compartilhamento, do sitemap, do
+  robots e dos dados estruturados. **Sem ela, tudo aponta para
+  `http://localhost:3000`**; preencha antes do build de produção.
+- **Dados estruturados (JSON-LD):** a loja (`ComputerStore`) na home; serviço e
+  trilha de navegação em cada página de serviço (`src/lib/seo.ts`).
+- **Imagem de compartilhamento:** `src/app/og.png/route.tsx` gera `og.png`
+  (1200×630) no build. É uma rota com extensão de propósito: o
+  `opengraph-image` do Next vira, no export estático, um arquivo sem extensão,
+  que hospedagens como o GitHub Pages servem como binário genérico. A fonte da
+  marca para a imagem fica em `src/assets/fontes/` (Plus Jakarta Sans, licença
+  OFL em `OFL.txt`), lida do disco: o build não precisa de internet.
+- **Ícone do iPhone:** `apple-touch-icon.png`, pelo mesmo caminho.
+- `sitemap.xml` e `robots.txt` gerados no build; página 404 em português.
+
 ## Componentes de terceiros
 
 | Componente | Origem | O que mudou |

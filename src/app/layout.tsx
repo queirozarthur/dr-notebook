@@ -4,6 +4,8 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import { Cabecalho } from "@/components/site/cabecalho";
 import { Rodape } from "@/components/site/rodape";
 import { WhatsAppFlutuante } from "@/components/site/whatsapp-flutuante";
+import { IMAGEM_DE_COMPARTILHAMENTO } from "@/lib/seo";
+import { URL_DO_SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
@@ -15,13 +17,27 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+const DESCRICAO =
+  "Assistência técnica em Maceió desde 2005. Reparo em placa de notebooks, MacBooks, PCs gamer, PS5, drones e celulares. Orçamento grátis pelo WhatsApp.";
+
+// A imagem de compartilhamento (og.png) vale para todas as páginas; o
+// metadataBase transforma os caminhos em URLs absolutas, que as redes exigem.
 export const metadata: Metadata = {
+  metadataBase: URL_DO_SITE,
   title: {
     default: "Dr. Notebook Maceió",
     template: "%s | Dr. Notebook Maceió",
   },
-  description:
-    "Assistência técnica em Maceió desde 2005. Reparo em placa de notebooks, MacBooks, PCs gamer, PS5, drones e celulares. Orçamento grátis pelo WhatsApp.",
+  description: DESCRICAO,
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Dr. Notebook Maceió",
+    description: DESCRICAO,
+    images: [IMAGEM_DE_COMPARTILHAMENTO],
+  },
+  twitter: { card: "summary_large_image", images: [IMAGEM_DE_COMPARTILHAMENTO.url] },
+  icons: { apple: "/apple-touch-icon.png" },
 };
 
 // A classe "js" entra no <html> antes da primeira pintura. As entradas animadas

@@ -11,12 +11,18 @@ const CenaPlaca = dynamic(() => import("@/components/3d/placa/cena-placa").then(
   ssr: false,
 });
 
-// A vista explode enquanto o palco sobe até o meio da tela, sem fixar a página (o
-// único pin do site é o do hero): quem para para ler já vê o chip em destaque.
-// Com movimento reduzido, já aparece explodida.
-const ROLAGEM = { start: "top 90%", end: "center 50%", scrub: 1 } as const;
+type PalcoPlacaProps = {
+  // "rolagem": explode enquanto o palco sobe até o meio da tela (home).
+  // "entrada": explode sozinha ao carregar, para o palco no topo de uma página.
+  animacao?: "rolagem" | "entrada";
+};
 
-export const PalcoPlaca: FC = () => {
+// Sem fixar a página (o único pin do site é o do hero): quem para para ler já vê
+// o chip em destaque. Com movimento reduzido, já aparece explodida.
+const ROLAGEM = { start: "top 90%", end: "center 50%", scrub: 1 } as const;
+const ENTRADA = { duration: 2.4, delay: 0.5, ease: "power2.inOut" } as const;
+
+export const PalcoPlaca: FC<PalcoPlacaProps> = ({ animacao = "rolagem" }) => {
   const { palco, ativa, movimentoReduzido, economizarDados, ponteiro, pronta, aoFicarPronta } = usePalco3D();
   const progresso = useRef<ProgressoPlaca>({ valor: 0 });
 
@@ -24,17 +30,18 @@ export const PalcoPlaca: FC = () => {
     () => {
       const elemento = palco.current;
       if (!elemento) return;
-      const animacao = progresso.current;
+      const estado = progresso.current;
 
       gsap.matchMedia().add(PREFERENCIA_DE_MOVIMENTO, (contexto) => {
         if (!contexto.conditions?.comMovimento) {
-          gsap.set(animacao, { valor: 1 });
+          gsap.set(estado, { valor: 1 });
           return;
         }
-        gsap.fromTo(animacao, { valor: 0 }, { valor: 1, ease: "none", scrollTrigger: { trigger: elemento, ...ROLAGEM } });
+        const animarAte = animacao === "entrada" ? ENTRADA : { scrollTrigger: { trigger: elemento, ...ROLAGEM } };
+        gsap.fromTo(estado, { valor: 0 }, { valor: 1, ease: "none", ...animarAte });
       });
     },
-    { scope: palco },
+    { scope: palco, dependencies: [animacao] },
   );
 
   return (

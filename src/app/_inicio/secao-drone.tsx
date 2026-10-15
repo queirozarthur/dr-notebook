@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { linkWhatsApp } from "@/lib/loja";
 import { mensagemDoServico } from "@/lib/servicos";
 import { FundoHexagonos } from "@/components/site/fundo-hexagonos";
-import { PalcoDrone } from "./palco-drone";
+import { PalcoDrone } from "@/components/3d/drone/palco-drone";
 
 // O título vem do reel da loja ("Então não sabe onde levar o seu drone?").
 // "Conserto de drone em Maceió" é uma das buscas em que a loja hoje não aparece.

@@ -38,9 +38,14 @@ export const loja = {
     cidadeUf: "Maceió/AL",
     cep: "57036-000",
   },
+  // `abertura` é a mesma informação no formato dos dados estruturados do Google.
   horario: [
-    { dias: "Segunda a sexta", horas: "8h às 19h" },
-    { dias: "Sábado", horas: "9h às 13h" },
+    {
+      dias: "Segunda a sexta",
+      horas: "8h às 19h",
+      abertura: { dias: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], abre: "08:00", fecha: "19:00" },
+    },
+    { dias: "Sábado", horas: "9h às 13h", abertura: { dias: ["Saturday"], abre: "09:00", fecha: "13:00" } },
     { dias: "Domingo", horas: "Fechado" },
   ],
 } as const;

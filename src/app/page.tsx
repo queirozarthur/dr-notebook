@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { FC } from "react";
+import { JsonLd } from "@/components/seo/json-ld";
 import { ChamadaFinal } from "@/components/site/chamada-final";
+import { dadosDaLoja } from "@/lib/seo";
 import { Hero } from "./_inicio/hero";
 import { SecaoAvaliacoes } from "./_inicio/secao-avaliacoes";
 import { SecaoDrone } from "./_inicio/secao-drone";
@@ -21,6 +23,7 @@ export const metadata: Metadata = {
 const Inicio: FC = () => {
   return (
     <main id="conteudo" className="flex-1">
+      <JsonLd dados={dadosDaLoja()} />
       <Hero />
       <Sintomas />
       <SecaoServicos />

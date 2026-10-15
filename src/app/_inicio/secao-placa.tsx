@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { linkWhatsApp } from "@/lib/loja";
 import { mensagemDoServico } from "@/lib/servicos";
 import { FundoHexagonos } from "@/components/site/fundo-hexagonos";
-import { PalcoPlaca } from "./palco-placa";
+import { PalcoPlaca } from "@/components/3d/placa/palco-placa";
 
 type Tecnica = {
   titulo: string;

@@ -11,11 +11,17 @@ const CenaDrone = dynamic(() => import("@/components/3d/drone/cena-drone").then(
   ssr: false,
 });
 
-// O drone sobe enquanto o palco entra na tela. Com movimento reduzido, já aparece
-// no lugar, parado.
-const ROLAGEM = { start: "top 90%", end: "center 55%", scrub: 1 } as const;
+type PalcoDroneProps = {
+  // "rolagem": sobe enquanto o palco entra na tela (home).
+  // "entrada": sobe sozinho ao carregar, para o palco no topo de uma página.
+  animacao?: "rolagem" | "entrada";
+};
 
-export const PalcoDrone: FC = () => {
+// Com movimento reduzido, o drone já aparece no lugar, parado.
+const ROLAGEM = { start: "top 90%", end: "center 55%", scrub: 1 } as const;
+const ENTRADA = { duration: 1.8, delay: 0.4, ease: "power2.out" } as const;
+
+export const PalcoDrone: FC<PalcoDroneProps> = ({ animacao = "rolagem" }) => {
   const { palco, ativa, movimentoReduzido, economizarDados, ponteiro, pronta, aoFicarPronta } = usePalco3D();
   const progresso = useRef<ProgressoDrone>({ valor: 0 });
 
@@ -23,17 +29,18 @@ export const PalcoDrone: FC = () => {
     () => {
       const elemento = palco.current;
       if (!elemento) return;
-      const animacao = progresso.current;
+      const estado = progresso.current;
 
       gsap.matchMedia().add(PREFERENCIA_DE_MOVIMENTO, (contexto) => {
         if (!contexto.conditions?.comMovimento) {
-          gsap.set(animacao, { valor: 1 });
+          gsap.set(estado, { valor: 1 });
           return;
         }
-        gsap.fromTo(animacao, { valor: 0 }, { valor: 1, ease: "none", scrollTrigger: { trigger: elemento, ...ROLAGEM } });
+        const animarAte = animacao === "entrada" ? ENTRADA : { scrollTrigger: { trigger: elemento, ...ROLAGEM } };
+        gsap.fromTo(estado, { valor: 0 }, { valor: 1, ease: "none", ...animarAte });
       });
     },
-    { scope: palco },
+    { scope: palco, dependencies: [animacao] },
   );
 
   return (
