@@ -18,4 +18,11 @@ export const ENTRADA = {
 
 export const SEM_MOVIMENTO_REDUZIDO = "(prefers-reduced-motion: no-preference)";
 
+// Para quem precisa de um ramo também com movimento reduzido: o gsap.matchMedia()
+// só chama a função quando alguma condição bate, então as duas vão juntas.
+export const PREFERENCIA_DE_MOVIMENTO = {
+  comMovimento: SEM_MOVIMENTO_REDUZIDO,
+  reduzido: "(prefers-reduced-motion: reduce)",
+} as const;
+
 export { gsap, ScrollTrigger, SplitText, useGSAP };

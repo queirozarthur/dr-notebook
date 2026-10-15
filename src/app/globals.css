@@ -52,6 +52,18 @@
      por ele. Os caminhos usam pathLength="1", por isso os valores vão de 0 a 1. */
   --animate-tracar: tracar 1.8s var(--ease-suave) 0.8s both;
   --animate-pulso: pulso 3.2s linear 2.8s infinite both;
+  /* Faixa de marcas (porte do marquee do Spell UI): a trilha tem duas cópias da
+     lista, então andar metade dela fecha o ciclo sem emenda. */
+  --animate-marquee: marquee 45s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
 
   @keyframes tracar {
     from {
@@ -182,6 +194,10 @@
     visibility: hidden;
     animation: mostrar-sem-js 0s 2.5s forwards;
   }
+}
+
+@utility pausar-animacao {
+  animation-play-state: paused;
 }
 
 @keyframes mostrar-sem-js {

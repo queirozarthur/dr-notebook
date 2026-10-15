@@ -112,6 +112,21 @@ em `src/components/3d/notebook/`.
 - O aviso `THREE.Clock ... deprecated` no console vem do próprio React Three
   Fiber 9.8 com o Three r186; não é do nosso código.
 
+## Vista explodida da placa (reparo em placa)
+
+Segunda cena 3D (`src/components/3d/placa/`): o notebook se abre em camadas
+enquanto a seção atravessa a tela (sem pin; o único pin é o do hero). O bloco de
+cima sobe, a bateria e o fundo se afastam e a placa-mãe fica à mostra. No fim, o
+chip de vídeo sobe e mostra a grade de esferas de solda (o que o reballing refaz),
+com um anel azul pulsando e as trilhas acesas.
+
+- A face da placa é desenhada em canvas (`textura-placa.ts`), com sorteio de
+  semente fixa: as trilhas saem iguais em todo carregamento. A serigrafia diz
+  "DR. NOTEBOOK · MACEIÓ".
+- `estudio.tsx` reúne o que as cenas compartilham (reflexos, luzes, câmera,
+  enquadramento) e `use-palco-3d.ts` o que os palcos compartilham (visibilidade,
+  movimento reduzido, economia de dados, mouse, fade de entrada).
+
 ## Componentes de terceiros
 
 | Componente | Origem | O que mudou |
@@ -119,6 +134,16 @@ em `src/components/3d/notebook/`.
 | `Button` | shadcn | reescrito com `tv()` e `forwardRef`, em pílula; mesma API |
 | acabamento do botão principal | Spell UI `rich-button` | degradê, brilho interno e sombra no texto, nas cores da marca |
 | `WordsStagger` | Spell UI `words-stagger` | de `motion` para GSAP + SplitText |
+| `Marquee` (faixa de marcas) | Spell UI `marquee` | de `styled-jsx` para tokens do Tailwind; lista parada com movimento reduzido |
+| `TiltCard` (cartões de serviço) | Spell UI `tilt-card` | sem estado React a cada movimento do mouse; só com mouse; parado com movimento reduzido |
+| `PalavraRotativa` (sintomas) | inspirada no Spell UI `text-marquee` | troca um item por vez, com pausa, em GSAP |
+
+### Armadilha do `gsap.matchMedia()`
+
+Ele só chama a função quando **alguma** condição bate. Quem precisa de um ramo
+para movimento reduzido (mostrar o estado final) deve passar as duas condições,
+`PREFERENCIA_DE_MOVIMENTO` em `src/lib/gsap.ts`; com uma condição só, o ramo
+reduzido nunca roda.
 
 ## Cabeçalho
 

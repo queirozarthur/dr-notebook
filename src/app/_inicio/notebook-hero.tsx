@@ -1,14 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useRef, useState, type FC, type ReactNode } from "react";
+import { useRef, type FC, type ReactNode } from "react";
+import { Camada3D } from "@/components/3d/camada-3d";
 import type { EstadoAnimacao } from "@/components/3d/notebook/pose";
-import { useEconomiaDeDados } from "@/hooks/use-economia-de-dados";
-import { usePonteiroNaJanela } from "@/hooks/use-ponteiro-na-janela";
-import { usePrefereMovimentoReduzido } from "@/hooks/use-prefere-movimento-reduzido";
-import { useVisivelNaTela } from "@/hooks/use-visivel-na-tela";
-import { SEM_MOVIMENTO_REDUZIDO, ScrollTrigger, gsap, useGSAP } from "@/lib/gsap";
-import { cn } from "@/lib/utils";
+import { usePalco3D } from "@/hooks/use-palco-3d";
+import { PREFERENCIA_DE_MOVIMENTO, ScrollTrigger, gsap, useGSAP } from "@/lib/gsap";
 
 // O Three.js só é baixado depois que a página já apareceu: o título do hero não
 // espera pelo 3D.
@@ -48,18 +45,8 @@ const acompanharRolagem = (palco: HTMLElement): ScrollTrigger.Vars => {
 };
 
 export const NotebookHero: FC<NotebookHeroProps> = ({ children }) => {
-  const palco = useRef<HTMLDivElement>(null);
+  const { palco, ativa, movimentoReduzido, economizarDados, ponteiro, pronta, aoFicarPronta } = usePalco3D();
   const estado = useRef<EstadoAnimacao>({ entrada: 0, rolagem: 0 });
-  const ponteiro = usePonteiroNaJanela();
-  const ativa = useVisivelNaTela(palco);
-  const movimentoReduzido = usePrefereMovimentoReduzido();
-  // Com economia de dados ligada, o 3D (uns 900 KB) não é baixado; fica o batimento.
-  const economizarDados = useEconomiaDeDados();
-  const [pronta, setPronta] = useState(false);
-
-  const aoFicarPronta = useCallback(() => {
-    setPronta(true);
-  }, []);
 
   useGSAP(
     () => {
@@ -69,7 +56,7 @@ export const NotebookHero: FC<NotebookHeroProps> = ({ children }) => {
       if (!elemento || !hero) return;
       const animacao = estado.current;
 
-      gsap.matchMedia().add({ desktop: DESKTOP, comMovimento: SEM_MOVIMENTO_REDUZIDO }, (contexto) => {
+      gsap.matchMedia().add({ ...PREFERENCIA_DE_MOVIMENTO, desktop: DESKTOP }, (contexto) => {
         const condicoes = contexto.conditions;
 
         // Movimento reduzido: o notebook já aparece aberto e de frente, parado.
@@ -104,10 +91,9 @@ export const NotebookHero: FC<NotebookHeroProps> = ({ children }) => {
     <div ref={palco} aria-hidden="true" className="relative mt-4 h-72 w-full sm:h-96 lg:mt-0 lg:h-136">
       <div className="absolute inset-x-0 bottom-0 mx-auto h-72 w-3xl max-w-full translate-y-1/4 rounded-full bg-primary/35 blur-3xl" />
       {children}
+      {/* Com economia de dados ligada, o 3D (uns 900 KB) não é baixado; fica o batimento. */}
       {!economizarDados && (
-        <div
-          className={cn("absolute inset-0 transition-opacity duration-700 ease-out", pronta ? "opacity-100" : "opacity-0")}
-        >
+        <Camada3D pronta={pronta}>
           <CenaNotebook
             estado={estado}
             ponteiro={ponteiro}
@@ -115,7 +101,7 @@ export const NotebookHero: FC<NotebookHeroProps> = ({ children }) => {
             movimentoReduzido={movimentoReduzido}
             aoFicarPronta={aoFicarPronta}
           />
-        </div>
+        </Camada3D>
       )}
     </div>
   );
