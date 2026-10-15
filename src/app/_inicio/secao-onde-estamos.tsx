@@ -4,6 +4,7 @@ import { MapPinned, Navigation } from "lucide-react";
 import { CabecalhoSecao } from "@/components/site/cabecalho-secao";
 import { Button } from "@/components/ui/button";
 import { loja } from "@/lib/loja";
+import { comCaminhoBase } from "@/lib/site";
 
 // Sem mapa embutido: um iframe do Google Maps carregaria cookies e scripts do
 // Google para todo visitante. Os botões abrem o Maps só para quem pedir.
@@ -74,7 +75,7 @@ export const SecaoOndeEstamos: FC = () => {
 
         <figure className="mx-auto w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-background lg:col-span-2">
           <Image
-            src="/imagens/loja.jpg"
+            src={comCaminhoBase("/imagens/loja.jpg")}
             width={382}
             height={455}
             sizes="(min-width: 640px) 384px, 100vw"

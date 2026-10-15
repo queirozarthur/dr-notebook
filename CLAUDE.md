@@ -41,7 +41,8 @@ O que vale em toda tarefa:
 - Windows 11 nativo, terminal PowerShell. Comandos de exemplo em PowerShell. Use
   `python` (não `python3`).
 - Pasta: `C:\Users\queir\Desktop\dr-notebook` (fora do OneDrive).
-- Repositório: https://github.com/queirozarthur/dr-notebook (**privado**).
+- Repositório: https://github.com/queirozarthur/dr-notebook (**público** desde
+  15/10/2026).
 - **Controle Inteligente de Aplicativos (Smart App Control) está ligado** e já
   bloqueou binários nativos em outro projeto (`psql.exe`, a DLL do
   `psycopg[binary]`, o oxlint 1.86). Se uma ferramenta falhar com "An Application
@@ -76,7 +77,11 @@ documenta soluções que podem ser reaproveitadas aqui:
 
 ## Decisões
 
-- Repositório privado até a publicação.
+- **Repositório público** (15/10/2026), para o GitHub Pages grátis. Os prints com
+  pessoas da equipe ficam fora do Git, em `referencias/privado/` (no `.gitignore`).
+- **Hospedagem:** demonstração no GitHub Pages, publicada pelo GitHub Actions
+  (`.github/workflows/publicar.yml`) em https://queirozarthur.github.io/dr-notebook/,
+  com `noindex` até a loja aprovar o site.
 - Cursos ficam fora do site por enquanto (só aparecem na lista de serviços do
   Google; voltam se a loja confirmar que ainda acontecem).
 - **Stack:** Next.js (App Router, exportação estática) + Tailwind v4 + shadcn.
@@ -105,9 +110,9 @@ documenta soluções que podem ser reaproveitadas aqui:
 
 ## A decidir (perguntar antes)
 
-- **Hospedagem e domínio:** `drnotebookmaceio.com.br` está livre. O GitHub Pages
-  grátis exige repositório público; antes disso, tirar de `referencias/` os prints
-  com pessoas da equipe.
+- **Domínio próprio:** `drnotebookmaceio.com.br` estava livre em 14/10/2026. Ao
+  publicar no domínio da loja, ajustar `SITE_URL`, `BASE_PATH` e `INDEXAR` (README,
+  "Publicação").
 - **Medição de audiência:** GA4 com consentimento, como no John Radio Web, ou nada.
 - **21st MCP:** recomendado; falta você gerar a chave em https://21st.dev/mcp. Até
   lá, os componentes do 21st entram pelo link de cada um.
@@ -117,6 +122,5 @@ documenta soluções que podem ser reaproveitadas aqui:
 - Destaques do Instagram (só abrem com login): Trajetória, Dúvidas (vira o FAQ),
   Serviços, Loja Nova.
 - Perguntas para a loja: lista em `docs/briefing.md`.
-- `public/imagens/loja.jpg` é um recorte da foto do perfil no Google (382 px, com
-  duas pessoas da equipe ao fundo). Trocar pela foto cedida pela loja; tirar antes
-  de tornar o repositório público.
+- `public/imagens/loja.jpg` é um recorte da foto do perfil no Google (382 px), com
+  as duas pessoas do balcão desfocadas. Trocar pela foto cedida pela loja.

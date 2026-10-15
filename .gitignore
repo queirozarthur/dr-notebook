@@ -7,6 +7,10 @@ desktop.ini
 .vscode/
 .idea/
 
+# Prints de referência com pessoas da equipe: ficam só no computador (o
+# repositório é público). Ver "Pendências" no CLAUDE.md.
+referencias/privado/
+
 # Configurações locais e segredos
 .env
 .env.*

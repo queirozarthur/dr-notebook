@@ -5,7 +5,7 @@ import { Cabecalho } from "@/components/site/cabecalho";
 import { Rodape } from "@/components/site/rodape";
 import { WhatsAppFlutuante } from "@/components/site/whatsapp-flutuante";
 import { IMAGEM_DE_COMPARTILHAMENTO } from "@/lib/seo";
-import { URL_DO_SITE } from "@/lib/site";
+import { INDEXAR, URL_DO_SITE, comCaminhoBase } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
@@ -37,7 +37,10 @@ export const metadata: Metadata = {
     images: [IMAGEM_DE_COMPARTILHAMENTO],
   },
   twitter: { card: "summary_large_image", images: [IMAGEM_DE_COMPARTILHAMENTO.url] },
-  icons: { apple: "/apple-touch-icon.png" },
+  icons: { apple: comCaminhoBase("/apple-touch-icon.png") },
+  // A demonstração (GitHub Pages) pede para não ser indexada: a loja ainda não
+  // aprovou o site, e ele não deve aparecer na busca como se fosse o oficial.
+  ...(!INDEXAR && { robots: { index: false, follow: false } }),
 };
 
 // A classe "js" entra no <html> antes da primeira pintura. As entradas animadas

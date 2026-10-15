@@ -179,6 +179,29 @@ topo); as outras, o ícone do serviço.
 - **Ícone do iPhone:** `apple-touch-icon.png`, pelo mesmo caminho.
 - `sitemap.xml` e `robots.txt` gerados no build; página 404 em português.
 
+## Publicação (GitHub Pages)
+
+Demonstração em **https://queirozarthur.github.io/dr-notebook/**, publicada pelo
+GitHub Actions (`.github/workflows/publicar.yml`) a cada push na `main`; também
+dá para rodar à mão em Actions → "Publicar no GitHub Pages" → Run workflow. O
+workflow roda o lint, gera o site e publica a pasta `out/`.
+
+- O site mora num subcaminho (`/dr-notebook`): o workflow passa `BASE_PATH` e
+  `SITE_URL` vindos do próprio Pages. Links, CSS e JS o Next prefixa sozinho; a
+  foto da loja e o ícone do iPhone passam por `comCaminhoBase()`
+  (`src/lib/site.ts`).
+- A demonstração sai com `INDEXAR=nao`: `noindex` em todas as páginas e
+  `robots.txt` com `Disallow`. A loja ainda não aprovou o site, e ele não deve
+  aparecer na busca como se fosse o oficial.
+- **Para publicar no domínio da loja:** `SITE_URL` com o domínio, `BASE_PATH`
+  vazio e `INDEXAR` vazio (ou `sim`).
+- Para testar o subcaminho localmente no Windows, defina as variáveis no
+  PowerShell: o Git Bash converte `/dr-notebook` num caminho do Windows.
+
+```powershell
+$env:BASE_PATH = '/dr-notebook'; $env:SITE_URL = 'https://queirozarthur.github.io/dr-notebook'; npm run build
+```
+
 ## Componentes de terceiros
 
 | Componente | Origem | O que mudou |
