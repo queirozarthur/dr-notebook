@@ -197,12 +197,26 @@ para movimento reduzido (mostrar o estado final) deve passar as duas condições
 `PREFERENCIA_DE_MOVIMENTO` em `src/lib/gsap.ts`; com uma condição só, o ramo
 reduzido nunca roda.
 
-## Cabeçalho
+## Cabeçalho (liquid glass)
 
-Fixo no topo só do `md` para cima, translúcido. No celular ele não fica fixo,
-como no John Radio Web: numa tela pequena, moldura fixa rouba espaço do
-conteúdo. O menu do celular fecha com Esc (devolvendo o foco ao botão), ao tocar
-fora e ao escolher um link.
+Uma cápsula de vidro flutuando sobre a página, no estilo do Liquid Glass da
+Apple (componente `VidroLiquido`, material `.vidro-liquido` em `globals.css`):
+
+- fundo desfocado e mais saturado, tinta azul-marinho de 66% (texto branco a
+  5,5:1 mesmo com o vidro sobre uma seção branca), contorno em degradê mais claro
+  no alto e um brilho especular que segue o mouse;
+- **refração nas bordas**: `src/lib/mapa-de-refracao.ts` desenha em canvas um
+  mapa de deslocamento do tamanho da cápsula (a borda arredondada entorta o fundo,
+  o meio não mexe), aplicado por `feDisplacementMap` no `backdrop-filter`. Só os
+  navegadores do Chromium (Chrome, Edge) aplicam filtro SVG no
+  `backdrop-filter`; nos outros fica o vidro desfocado, sem refração;
+- com "reduzir transparência" ligado no sistema, a cápsula fica sólida.
+
+A cápsula flutua sobre a primeira seção de cada página, que reserva o espaço de
+cima (`pt-28` ou mais). Do `md` para cima ela acompanha a rolagem; no celular não
+fica fixa, como no John Radio Web (numa tela pequena, moldura fixa rouba espaço
+do conteúdo). O menu do celular abre no mesmo vidro e fecha com Esc (devolvendo
+o foco ao botão), ao tocar fora e ao escolher um link.
 
 ## TypeScript
 

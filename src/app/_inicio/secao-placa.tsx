@@ -45,7 +45,7 @@ export const SecaoPlaca: FC = () => {
     <section
       id="reparo-em-placa"
       aria-labelledby="placa-titulo"
-      className="palco relative isolate scroll-mt-14 overflow-hidden py-24 md:py-32"
+      className="palco relative isolate scroll-mt-24 overflow-hidden py-24 md:py-32"
     >
       <FundoHexagonos />
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 lg:grid-cols-2">

@@ -22,7 +22,7 @@ export const Hero: FC = () => {
     >
       <FundoHexagonos />
 
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-x-12 px-4 pt-16 lg:grid-cols-2 lg:py-20">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-x-12 px-4 pt-28 lg:grid-cols-2 lg:py-24">
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
           <h1 id="hero-titulo" className="flex flex-col items-center gap-5 lg:items-start">
             <RevelarEmSequencia as="span" className="block">

@@ -26,7 +26,10 @@ export const Sintomas: FC = () => {
         <Button asChild size="lg" className="mt-10">
           <a href={linkWhatsApp(MENSAGEM_PROBLEMA)} target="_blank" rel="noopener">
             <IconeWhatsApp />
-            Contar o problema<span className="hidden sm:inline">&nbsp;no WhatsApp</span>
+            {/* Um só item no flex do botão: com dois, o gap viraria um espaço a mais. */}
+            <span>
+              Contar o problema<span className="hidden sm:inline"> no WhatsApp</span>
+            </span>
           </a>
         </Button>
       </div>

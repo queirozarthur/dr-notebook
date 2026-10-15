@@ -59,7 +59,7 @@ const PaginaServico: FC<PaginaServicoProps> = async ({ params }) => {
 
       <section aria-labelledby="servico-titulo" className="palco relative isolate overflow-hidden">
         <FundoHexagonos />
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 pt-10 pb-16 lg:grid-cols-2 lg:gap-12 lg:py-20">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 pt-28 pb-16 lg:grid-cols-2 lg:gap-12 lg:pt-32 lg:pb-20">
           <div>
             <nav aria-label="Trilha de navegação">
               <ol className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">

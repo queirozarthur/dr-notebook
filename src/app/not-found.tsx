@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const NaoEncontrada: FC = () => {
   return (
-    <main id="conteudo" className="palco relative isolate flex flex-1 items-center overflow-hidden py-24 md:py-32">
+    <main id="conteudo" className="palco relative isolate flex flex-1 items-center overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
       <FundoHexagonos />
       <div className="mx-auto flex max-w-2xl flex-col items-center px-4 text-center">
         <p className="text-sm font-semibold tracking-widest text-link uppercase">Erro 404</p>

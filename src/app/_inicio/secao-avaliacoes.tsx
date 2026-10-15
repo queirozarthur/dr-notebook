@@ -12,7 +12,7 @@ const NOTA_MAXIMA = 5;
 
 export const SecaoAvaliacoes: FC = () => {
   return (
-    <section id="avaliacoes" aria-labelledby="avaliacoes-titulo" className="scroll-mt-14 bg-background py-24 md:py-32">
+    <section id="avaliacoes" aria-labelledby="avaliacoes-titulo" className="scroll-mt-24 bg-background py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-4">
         <CabecalhoSecao
           id="avaliacoes-titulo"

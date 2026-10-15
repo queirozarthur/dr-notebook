@@ -11,7 +11,7 @@ export const SecaoOndeEstamos: FC = () => {
   const { endereco, horario, whatsapp, email, instagram, mapas } = loja;
 
   return (
-    <section id="onde-estamos" aria-labelledby="onde-titulo" className="scroll-mt-14 bg-muted py-24 md:py-32">
+    <section id="onde-estamos" aria-labelledby="onde-titulo" className="scroll-mt-24 bg-muted py-24 md:py-32">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 lg:grid-cols-5 lg:items-center">
         <div className="lg:col-span-3">
           <CabecalhoSecao

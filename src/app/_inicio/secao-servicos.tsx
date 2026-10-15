@@ -18,7 +18,7 @@ const LARGOS: readonly SlugServico[] = ["reparo-em-placa", "software-e-ti"];
 
 export const SecaoServicos: FC = () => {
   return (
-    <section id="servicos" aria-labelledby="servicos-titulo" className="scroll-mt-14 bg-muted py-24 md:py-32">
+    <section id="servicos" aria-labelledby="servicos-titulo" className="scroll-mt-24 bg-muted py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-4">
         <CabecalhoSecao
           id="servicos-titulo"

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useId, type FC } from "react";
 import { Menu, X } from "lucide-react";
+import { VidroLiquido } from "@/components/efeitos/vidro-liquido";
 import { IconeWhatsApp } from "@/components/marca/icone-whatsapp";
 import { Button } from "@/components/ui/button";
 import { MENSAGEM_ORCAMENTO, linkWhatsApp } from "@/lib/loja";
@@ -14,6 +15,7 @@ type MenuCelularProps = {
   links: readonly LinkNavegacao[];
 };
 
+// O painel abre logo abaixo da cápsula do cabeçalho, no mesmo vidro.
 export const MenuCelular: FC<MenuCelularProps> = ({ links }) => {
   const { aberto, alternar, fechar, raiz, botao } = useMenuCelular();
   const idPainel = useId();
@@ -26,7 +28,7 @@ export const MenuCelular: FC<MenuCelularProps> = ({ links }) => {
         aria-expanded={aberto}
         aria-controls={idPainel}
         onClick={alternar}
-        className="grid size-11 place-items-center rounded-full text-foreground transition-[background-color,scale] duration-150 ease-out outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring active:scale-96"
+        className="grid size-11 place-items-center rounded-full text-foreground transition-[background-color,scale] duration-150 ease-out outline-none hover:bg-foreground/10 focus-visible:ring-2 focus-visible:ring-ring active:scale-96"
       >
         <span className="sr-only">{aberto ? "Fechar menu" : "Abrir menu"}</span>
         <IconeMenu aberto={aberto} />
@@ -36,33 +38,35 @@ export const MenuCelular: FC<MenuCelularProps> = ({ links }) => {
         id={idPainel}
         inert={!aberto}
         className={cn(
-          "absolute inset-x-0 top-full border-b border-border bg-background px-4 pt-2 pb-6 shadow-2xl shadow-black/50",
+          "absolute inset-x-0 top-full mt-2",
           "transition-[opacity,translate,visibility] duration-200 ease-suave",
           aberto ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0",
         )}
       >
-        <nav aria-label="Principal">
-          <ul className="flex flex-col">
-            {links.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={fechar}
-                  className="flex h-14 items-center border-b border-border text-lg font-semibold outline-none focus-visible:text-link"
-                >
-                  {link.rotulo}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <VidroLiquido className="rounded-3xl px-5 pt-2 pb-5">
+          <nav aria-label="Principal">
+            <ul className="flex flex-col">
+              {links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={fechar}
+                    className="flex h-14 items-center border-b border-border text-lg font-semibold outline-none focus-visible:text-link"
+                  >
+                    {link.rotulo}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <Button asChild size="lg" className="mt-6 w-full">
-          <a href={linkWhatsApp(MENSAGEM_ORCAMENTO)} target="_blank" rel="noopener">
-            <IconeWhatsApp />
-            Pedir orçamento grátis
-          </a>
-        </Button>
+          <Button asChild size="lg" className="mt-5 w-full">
+            <a href={linkWhatsApp(MENSAGEM_ORCAMENTO)} target="_blank" rel="noopener">
+              <IconeWhatsApp />
+              Pedir orçamento grátis
+            </a>
+          </Button>
+        </VidroLiquido>
       </div>
     </div>
   );
