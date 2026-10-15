@@ -1,7 +1,7 @@
 import { useId, type FC } from "react";
 
 // Colmeia de hexágonos, o motivo das artes da loja, bem sutil e apagando para as
-// bordas. Embaixo, o brilho azul onde o notebook 3D vai ficar (passo 3).
+// bordas. O brilho azul fica no palco do notebook (notebook-hero.tsx).
 const LADO = 34;
 const LARGURA = Math.sqrt(3) * LADO;
 const ALTURA = 3 * LADO;
@@ -32,7 +32,6 @@ export const FundoHexagonos: FC = () => {
         </defs>
         <rect width="100%" height="100%" fill={`url(#${idPadrao})`} />
       </svg>
-      <div className="absolute bottom-0 left-1/2 h-96 w-4xl -translate-x-1/2 translate-y-1/2 rounded-full bg-primary/40 blur-3xl" />
     </div>
   );
 };

@@ -86,6 +86,32 @@ Sem a biblioteca `motion`: transições de estado em CSS, sequências em GSAP
 - O batimento do hero é só CSS (`animate-tracar` e `animate-pulso`, definidos
   como tokens no `@theme`).
 
+## Notebook 3D (hero)
+
+Three.js com React Three Fiber, modelo construído em código (sem arquivo 3D
+baixado): base, teclado com teclas instanciadas, trackpad, dobradiça e tampa. Tudo
+em `src/components/3d/notebook/`.
+
+- **Tela:** um shader (`material-tela.ts`) desenha um monitor cardíaco, com dois
+  batimentos, grade e a varredura de monitor de hospital. A tela acende conforme a
+  tampa abre e ilumina o teclado de azul.
+- **Animação:** o GSAP anima só dois números numa ref, `entrada` (ao carregar) e
+  `rolagem` (com o scroll); a cena lê a ref a cada quadro e calcula a pose
+  (`pose.ts`). Nenhum estado React muda por quadro.
+- **Desktop (lg+):** o hero inteiro fica fixo por 80% de uma tela de rolagem
+  enquanto a tampa abre (`pinSpacing: true` explícito, porque o ScrollTrigger o
+  desliga quando o pai é flex). **Celular e tablet:** sem fixar; a tampa abre
+  enquanto o palco passa pela tela.
+- **Movimento reduzido:** o notebook já aparece aberto e parado, sem pin.
+- **Desempenho:** o Three.js (uns 900 KB) é um pacote separado, carregado só
+  depois da página (`next/dynamic`, sem SSR). A cena para de desenhar fora da
+  tela, e com movimento reduzido só desenha quando algo muda. Com a economia de
+  dados do navegador ligada, o 3D nem é baixado.
+- **Reflexos:** `RoomEnvironment` do Three gera o ambiente de estúdio em código;
+  nenhum HDR é baixado de CDN.
+- O aviso `THREE.Clock ... deprecated` no console vem do próprio React Three
+  Fiber 9.8 com o Three r186; não é do nosso código.
+
 ## Componentes de terceiros
 
 | Componente | Origem | O que mudou |

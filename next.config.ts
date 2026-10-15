@@ -4,6 +4,8 @@ import type { NextConfig } from "next";
 // publicável em qualquer hospedagem (GitHub Pages incluído).
 const nextConfig: NextConfig = {
   output: "export",
+  // O next dev criaria um AGENTS.md; as instruções do projeto ficam no CLAUDE.md.
+  agentRules: false,
   trailingSlash: true,
   images: { unoptimized: true },
   turbopack: {

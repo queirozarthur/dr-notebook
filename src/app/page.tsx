@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const Inicio: FC = () => {
   return (
-    <main id="conteudo" className="flex flex-1 flex-col">
+    <main id="conteudo" className="flex-1">
       <Hero />
     </main>
   );

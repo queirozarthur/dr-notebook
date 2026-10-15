@@ -50,8 +50,8 @@ O que vale em toda tarefa:
 
 ## Como trabalhar comigo
 
-- Passos pequenos. Termine um passo, mostre o que mudou e espere eu revisar antes
-  do próximo.
+- Passos pequenos, um commit por passo. Ao terminar um passo, pode seguir para o
+  próximo sem esperar revisão (combinado em 15/10/2026); mostre o que mudou ao fim.
 - Antes de editar vários arquivos, mostre o plano em poucas linhas.
 - Quando eu pedir um arquivo, entregue o arquivo completo, não só um trecho.
 - Faça um commit por passo concluído, com mensagem curta em português.
@@ -99,6 +99,9 @@ documenta soluções que podem ser reaproveitadas aqui:
 - **Animação:** CSS para transições de estado e GSAP para sequências, sem a
   biblioteca `motion`, como pedem as skills. Componentes do Spell UI que dependem
   de `motion` são portados para GSAP/CSS.
+- **`AGENTS.md` do Next desligado** (`agentRules: false`): as instruções do projeto
+  ficam só neste arquivo. A documentação da versão instalada do Next está em
+  `node_modules/next/dist/docs/`.
 
 ## A decidir (perguntar antes)
 
