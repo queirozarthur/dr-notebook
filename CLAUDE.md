@@ -79,21 +79,35 @@ documenta soluções que podem ser reaproveitadas aqui:
 - Repositório privado até a publicação.
 - Cursos ficam fora do site por enquanto (só aparecem na lista de serviços do
   Google; voltam se a loja confirmar que ainda acontecem).
+- **Stack:** Next.js (App Router, exportação estática) + Tailwind v4 + shadcn.
+  Seguir as skills de front-end instaladas (`hzblj-skills`: tailwind, nextjs-routing,
+  component-architecture, type-safety, ui-*, gsap-*, css-animations).
+- **Arsenal de componentes:** [Spell UI](https://spell.sh/docs) e
+  [21st.dev](https://21st.dev), adaptados à marca. Usar os que se encaixam na
+  proposta, não todos.
+- **3D:** Three.js via React Three Fiber, com modelos construídos em código (leves,
+  nas cores da marca, sem licença de terceiros): notebook no hero com o batimento
+  cardíaco da logo na tela, vista explodida da placa, drone. Pausa fora da tela e
+  vira imagem parada com `prefers-reduced-motion`.
+- **Referências visuais (Refero):** Apple *"white room with a single blue switch"*
+  nas seções claras; Apple *"Midnight hardware gallery"* nos palcos 3D, com o
+  azul-marinho da loja no lugar do preto.
+- **Estrutura:** home + uma página por serviço.
+- **Grafia do nome:** "Dr. Notebook", sempre com "Maceió".
 
 ## A decidir (perguntar antes)
 
-- **Stack:** HTML/CSS/JS puro como no John Radio Web, ou um framework (Astro,
-  Next.js). As skills de front-end instaladas são escritas para Next.js.
-- **Estrutura:** página única ou uma página por serviço. Páginas próprias ajudam a
-  aparecer em "conserto drone maceió" e "conserto ps5 maceió", buscas em que a loja
-  hoje não aparece.
 - **Hospedagem e domínio:** `drnotebookmaceio.com.br` está livre. O GitHub Pages
   grátis exige repositório público; antes disso, tirar de `referencias/` os prints
   com pessoas da equipe.
-- **Grafia do nome:** sugestão "Dr. Notebook" (hoje aparece de quatro jeitos).
-- **Logo na demonstração:** só temos em 320 px. Usar assim, vetorizar ou esperar o
-  arquivo da loja.
+- **Logo na demonstração:** a melhor imagem que temos é `referencias/logo-perfil.jpg`
+  (150 px). Sugestão: redesenhar em SVG; a versão publicada usa o arquivo da loja.
 - **Medição de audiência:** GA4 com consentimento, como no John Radio Web, ou nada.
+- **21st MCP:** precisa de chave de API gerada em https://21st.dev/mcp. Sem ela,
+  os componentes do 21st entram pelo link de cada um.
+- **Biblioteca de animação:** as skills pedem CSS/GSAP e nenhuma biblioteca
+  `motion`, mas vários componentes do Spell UI (`words-stagger`, `blur-reveal`,
+  `marquee`) dependem de `motion`. Portar para GSAP/CSS ou abrir exceção.
 
 ## Pendências
 

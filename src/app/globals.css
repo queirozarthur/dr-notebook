@@ -1,0 +1,128 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Componentes de terceiros (Spell UI, 21st) trazem ajustes em dark:. Dentro de um
+   palco azul-marinho eles valem também, porque o palco é uma superfície escura. */
+@custom-variant dark (&:is(.dark *, .palco *));
+
+@theme inline {
+  --font-sans: var(--font-jakarta);
+  --font-heading: var(--font-jakarta);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-link: var(--link);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Paleta da marca, amostrada dos prints em referencias/ (parede da loja e arte
+   "Seu Mac parou?"). Só a camada de tokens abaixo usa estes nomes. */
+:root {
+  --marinho-950: #061430;
+  --marinho-900: #0c2250;
+  --tinta: #0b1630;
+  --ardosia: #4a5878;
+  --azul-vivo: #0353c6;
+  --azul-palco: #1a6bf0;
+  --azul-claro: #4d94ff;
+  --gelo: #eef3fb;
+  --nevoa: #f3f6fb;
+  --linha: #dde3ee;
+  --nevoa-palco: #9fb0cf;
+}
+
+/* Contraste medido (WCAG):
+   tinta no branco 17,92:1 · ardósia no branco 7,10:1 · azul-vivo no branco 6,87:1
+   (texto e botão com texto branco) · azul-vivo na névoa 6,34:1 */
+:root {
+  --background: #ffffff;
+  --foreground: var(--tinta);
+  --card: #ffffff;
+  --card-foreground: var(--tinta);
+  --popover: #ffffff;
+  --popover-foreground: var(--tinta);
+  --primary: var(--azul-vivo);
+  --primary-foreground: #ffffff;
+  --secondary: var(--gelo);
+  --secondary-foreground: var(--tinta);
+  --muted: var(--nevoa);
+  --muted-foreground: var(--ardosia);
+  --accent: var(--gelo);
+  --accent-foreground: var(--tinta);
+  --destructive: #c62828;
+  --border: var(--linha);
+  --input: var(--linha);
+  --ring: var(--azul-vivo);
+  --link: var(--azul-vivo);
+  --radius: 0.75rem;
+}
+
+/* Palco: a seção azul-marinho onde ficam as cenas 3D. O azul-vivo some no marinho
+   (2,66:1), por isso o palco tem dois azuis próprios:
+   azul-palco #1a6bf0 no botão: texto branco 4,77:1, botão contra o fundo 3,83:1
+   azul-claro #4d94ff em links e destaques: 6,08:1
+   texto 17,02:1 · texto suave 8,33:1 (7,05:1 no marinho-900) */
+.palco {
+  --background: var(--marinho-950);
+  --foreground: #f5f7fb;
+  --card: var(--marinho-900);
+  --card-foreground: #f5f7fb;
+  --popover: var(--marinho-900);
+  --popover-foreground: #f5f7fb;
+  --primary: var(--azul-palco);
+  --primary-foreground: #ffffff;
+  --secondary: var(--marinho-900);
+  --secondary-foreground: #f5f7fb;
+  --muted: var(--marinho-900);
+  --muted-foreground: var(--nevoa-palco);
+  --accent: var(--marinho-900);
+  --accent-foreground: #f5f7fb;
+  --border: rgb(255 255 255 / 0.12);
+  --input: rgb(255 255 255 / 0.16);
+  --ring: var(--azul-claro);
+  --link: var(--azul-claro);
+
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background font-sans text-foreground;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}

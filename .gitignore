@@ -15,3 +15,8 @@ desktop.ini
 # Dependências e build
 node_modules/
 dist/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+npm-debug.log*
