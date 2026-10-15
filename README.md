@@ -127,6 +127,31 @@ com um anel azul pulsando e as trilhas acesas.
   enquadramento) e `use-palco-3d.ts` o que os palcos compartilham (visibilidade,
   movimento reduzido, economia de dados, mouse, fade de entrada).
 
+## Drone 3D
+
+Terceira cena (`src/components/3d/drone/`): drone dobrável de quatro hélices,
+feito em código. Sobe ao entrar na tela, flutua e se inclina para o lado do
+mouse; as hélices vizinhas giram em sentidos opostos, com um disco translúcido
+simulando o borrão. Com movimento reduzido, fica parado.
+
+## Seções da home
+
+Hero (palco) → sintomas (claro) → serviços (cinza) → reparo em placa (palco) →
+MacBook (claro) → drone (palco) → avaliações (claro) → onde estamos (cinza) →
+chamada final (palco) → rodapé. Claro para ler, palco azul-marinho para o 3D.
+
+- **Avaliações:** só o que está no briefing. Citações literais vão entre aspas,
+  num `<blockquote>`; o relato da cliente que ouviu que não precisava trocar peças
+  é um resumo e aparece sem aspas (`Trecho` é uma união com discriminante).
+- **Onde estamos:** sem mapa embutido. Um iframe do Google Maps carregaria
+  cookies e scripts do Google para todo visitante; os botões "Como chegar" e "Ver
+  no Google Maps" abrem o Maps só para quem pedir.
+- **Foto da loja:** recorte provisório da foto do perfil no Google (ver
+  pendências no `CLAUDE.md`).
+- **WhatsApp flutuante:** no celular, depois da primeira tela, um botão redondo
+  mantém o WhatsApp a um toque (o cabeçalho do celular não é fixo). Some do `lg`
+  para cima, onde o cabeçalho fixo já tem o botão.
+
 ## Componentes de terceiros
 
 | Componente | Origem | O que mudou |

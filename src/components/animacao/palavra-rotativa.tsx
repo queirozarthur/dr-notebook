@@ -41,8 +41,10 @@ export const PalavraRotativa: FC<PalavraRotativaProps> = ({ itens, className }) 
     { scope: pilha, dependencies: [itens] },
   );
 
+  // leading-normal: com a altura de linha apertada dos títulos, a perna de letras
+  // como "q" e "p" vazaria para a linha de baixo e apareceria no recorte.
   return (
-    <span aria-hidden="true" className={cn("relative inline-block whitespace-nowrap", className)}>
+    <span aria-hidden="true" className={cn("relative inline-block leading-normal whitespace-nowrap", className)}>
       <span className="invisible">{maisLongo}</span>
       <span className="absolute inset-0 overflow-hidden">
         <span ref={pilha} className="flex flex-col items-center">

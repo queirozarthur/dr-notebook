@@ -6,7 +6,7 @@ import { CabecalhoSecao } from "@/components/site/cabecalho-secao";
 import { Button } from "@/components/ui/button";
 import { linkWhatsApp } from "@/lib/loja";
 import { mensagemDoServico } from "@/lib/servicos";
-import { FundoHexagonos } from "./fundo-hexagonos";
+import { FundoHexagonos } from "@/components/site/fundo-hexagonos";
 import { PalcoPlaca } from "./palco-placa";
 
 type Tecnica = {

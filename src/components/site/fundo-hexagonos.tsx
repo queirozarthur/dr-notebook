@@ -1,7 +1,7 @@
 import { useId, type FC } from "react";
 
 // Colmeia de hexágonos, o motivo das artes da loja, bem sutil e apagando para as
-// bordas. O brilho azul fica no palco do notebook (notebook-hero.tsx).
+// bordas. Fica atrás das seções em azul-marinho (hero, placa, drone, chamada final).
 const LADO = 34;
 const LARGURA = Math.sqrt(3) * LADO;
 const ALTURA = 3 * LADO;

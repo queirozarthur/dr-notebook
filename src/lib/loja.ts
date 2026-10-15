@@ -3,6 +3,8 @@
 
 const WHATSAPP_NUMERO = "5582991298384";
 const WHATSAPP_BASE = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMERO}`;
+const COORDENADAS = { latitude: -9.6513854, longitude: -35.7131546 } as const;
+const BUSCA_NO_GOOGLE = "Dr. Notebook Informática, Divina Galeria, Jatiúca, Maceió";
 
 // Mensagem que já vem escrita quando o visitante abre o WhatsApp pelo site: a loja
 // sabe de onde veio o contato e o visitante só precisa apertar enviar.
@@ -22,7 +24,13 @@ export const loja = {
     link: WHATSAPP_BASE,
   },
   email: "drnotebookmcz@outlook.com",
-  instagram: "https://www.instagram.com/drnotebookmcz/",
+  instagram: { usuario: "@drnotebookmcz", link: "https://www.instagram.com/drnotebookmcz/" },
+  coordenadas: COORDENADAS,
+  mapas: {
+    // O perfil da loja no Google (com as avaliações) e a rota até a galeria.
+    perfil: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(BUSCA_NO_GOOGLE)}`,
+    rota: `https://www.google.com/maps/dir/?api=1&destination=${COORDENADAS.latitude},${COORDENADAS.longitude}`,
+  },
   endereco: {
     local: "Divina Galeria",
     rua: "Av. Dr. Antônio Gomes de Barros, 637, Loja 3",

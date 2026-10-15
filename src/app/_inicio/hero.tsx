@@ -6,7 +6,7 @@ import { IconeWhatsApp } from "@/components/marca/icone-whatsapp";
 import { WordsStagger } from "@/components/spell/words-stagger";
 import { Button } from "@/components/ui/button";
 import { MENSAGEM_ORCAMENTO, linkWhatsApp, loja } from "@/lib/loja";
-import { FundoHexagonos } from "./fundo-hexagonos";
+import { FundoHexagonos } from "@/components/site/fundo-hexagonos";
 import { LinhaBatimento } from "./linha-batimento";
 import { NotebookHero } from "./notebook-hero";
 

@@ -117,3 +117,6 @@ documenta soluções que podem ser reaproveitadas aqui:
 - Destaques do Instagram (só abrem com login): Trajetória, Dúvidas (vira o FAQ),
   Serviços, Loja Nova.
 - Perguntas para a loja: lista em `docs/briefing.md`.
+- `public/imagens/loja.jpg` é um recorte da foto do perfil no Google (382 px, com
+  duas pessoas da equipe ao fundo). Trocar pela foto cedida pela loja; tirar antes
+  de tornar o repositório público.

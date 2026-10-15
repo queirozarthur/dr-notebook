@@ -11,9 +11,10 @@ const CenaPlaca = dynamic(() => import("@/components/3d/placa/cena-placa").then(
   ssr: false,
 });
 
-// A vista explode enquanto o palco atravessa a tela, sem fixar a página: o único
-// pin do site é o do hero. Com movimento reduzido, já aparece explodida.
-const ROLAGEM = { start: "top 85%", end: "bottom 45%", scrub: 1 } as const;
+// A vista explode enquanto o palco sobe até o meio da tela, sem fixar a página (o
+// único pin do site é o do hero): quem para para ler já vê o chip em destaque.
+// Com movimento reduzido, já aparece explodida.
+const ROLAGEM = { start: "top 90%", end: "center 50%", scrub: 1 } as const;
 
 export const PalcoPlaca: FC = () => {
   const { palco, ativa, movimentoReduzido, economizarDados, ponteiro, pronta, aoFicarPronta } = usePalco3D();
