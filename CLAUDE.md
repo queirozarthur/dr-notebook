@@ -94,20 +94,20 @@ documenta soluções que podem ser reaproveitadas aqui:
   azul-marinho da loja no lugar do preto.
 - **Estrutura:** home + uma página por serviço.
 - **Grafia do nome:** "Dr. Notebook", sempre com "Maceió".
+- **Logo na demonstração:** redesenhada em SVG a partir de
+  `referencias/logo-perfil.jpg` (150 px). A versão publicada usa o arquivo da loja.
+- **Animação:** CSS para transições de estado e GSAP para sequências, sem a
+  biblioteca `motion`, como pedem as skills. Componentes do Spell UI que dependem
+  de `motion` são portados para GSAP/CSS.
 
 ## A decidir (perguntar antes)
 
 - **Hospedagem e domínio:** `drnotebookmaceio.com.br` está livre. O GitHub Pages
   grátis exige repositório público; antes disso, tirar de `referencias/` os prints
   com pessoas da equipe.
-- **Logo na demonstração:** a melhor imagem que temos é `referencias/logo-perfil.jpg`
-  (150 px). Sugestão: redesenhar em SVG; a versão publicada usa o arquivo da loja.
 - **Medição de audiência:** GA4 com consentimento, como no John Radio Web, ou nada.
-- **21st MCP:** precisa de chave de API gerada em https://21st.dev/mcp. Sem ela,
-  os componentes do 21st entram pelo link de cada um.
-- **Biblioteca de animação:** as skills pedem CSS/GSAP e nenhuma biblioteca
-  `motion`, mas vários componentes do Spell UI (`words-stagger`, `blur-reveal`,
-  `marquee`) dependem de `motion`. Portar para GSAP/CSS ou abrir exceção.
+- **21st MCP:** recomendado; falta você gerar a chave em https://21st.dev/mcp. Até
+  lá, os componentes do 21st entram pelo link de cada um.
 
 ## Pendências
 

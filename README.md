@@ -48,6 +48,65 @@ O `dark:` dos componentes de terceiros também vale dentro do `.palco`
 Plus Jakarta Sans, uma sans geométrica pesada como a das artes da loja. O
 `next/font` hospeda a fonte junto do site, sem requisição ao Google.
 
+## Logo
+
+Redesenho em SVG da logo da loja (`referencias/logo-perfil.jpg`, que só tem
+150 px): "Dr." pequeno, "Noteb" em degradê, o notebook com batimento no lugar do
+"oo" e o "k" com estetoscópio. A versão publicada deve usar o arquivo da loja.
+
+- `scripts/gerar-logo.mjs` gera `src/components/marca/logo-geometria.ts`. As
+  letras são a Plus Jakarta Sans ExtraBold convertida em curvas (`opentype.js`),
+  então a logo não depende de fonte instalada. Para mudar a logo, edite o script
+  e rode `node scripts/gerar-logo.mjs`; não edite o `.ts` gerado.
+- O `opentype.js` 2.0 quebra no GSUB desta fonte; por isso o script monta o
+  texto glifo a glifo, com kerning, sem as substituições tipográficas.
+- `<Logo />` pinta com os tokens `--logo-*`, que o `.palco` reaponta: a mesma
+  logo serve no branco e no azul-marinho. Cada instância cria o próprio degradê
+  (`useId`), porque o `<stop>` resolve as cores onde o degradê está, não onde ele
+  é usado.
+- `src/app/icon.svg` é o favicon, desenhado à mão numa grade de 32 px para ficar
+  legível em 16 px.
+
+## Animações
+
+Sem a biblioteca `motion`: transições de estado em CSS, sequências em GSAP
+(`gsap`, `SplitText`, `ScrollTrigger`, registrados uma vez em `src/lib/gsap.ts`).
+
+- `RevelarEmSequencia` (`src/components/animacao/`): os filhos entram em fila
+  com os valores da skill ui-motion: sobem 12 px, ganham opacidade, saem de um
+  desfoque de 4 px, 100 ms entre um e outro.
+- `WordsStagger` (`src/components/spell/`): porte do
+  [words-stagger](https://spell.sh/docs/words-stagger) do Spell UI para GSAP +
+  SplitText. Palavra por palavra, 80 ms entre elas; ao fim o texto original volta
+  (`revert`), para leitores de tela e buscadores.
+- **Sem piscar:** um script inline no `<head>` põe a classe `js` no `<html>`
+  antes da primeira pintura, e só com ela os blocos `[data-animacao="entrada"]`
+  nascem escondidos. Se o JS falhar, uma animação de CSS os mostra em 2,5 s. Com
+  `prefers-reduced-motion`, nada é escondido nem animado.
+- O batimento do hero é só CSS (`animate-tracar` e `animate-pulso`, definidos
+  como tokens no `@theme`).
+
+## Componentes de terceiros
+
+| Componente | Origem | O que mudou |
+| --- | --- | --- |
+| `Button` | shadcn | reescrito com `tv()` e `forwardRef`, em pílula; mesma API |
+| acabamento do botão principal | Spell UI `rich-button` | degradê, brilho interno e sombra no texto, nas cores da marca |
+| `WordsStagger` | Spell UI `words-stagger` | de `motion` para GSAP + SplitText |
+
+## Cabeçalho
+
+Fixo no topo só do `md` para cima, translúcido. No celular ele não fica fixo,
+como no John Radio Web: numa tela pequena, moldura fixa rouba espaço do
+conteúdo. O menu do celular fecha com Esc (devolvendo o foco ao botão), ao tocar
+fora e ao escolher um link.
+
+## TypeScript
+
+Além do `strict`, o `tsconfig.json` liga `noUncheckedIndexedAccess`,
+`exactOptionalPropertyTypes` e `noImplicitOverride`, como pede a skill
+type-safety.
+
 ## Dados da loja
 
 `src/lib/loja.ts` reúne contato, endereço, horário e avaliações. Tudo vem do

@@ -30,6 +30,11 @@
   --color-ring: var(--ring);
   --color-link: var(--link);
 
+  --color-logo-inicio: var(--logo-inicio);
+  --color-logo-fim: var(--logo-fim);
+  --color-logo-aparelho: var(--logo-aparelho);
+  --color-logo-estetoscopio: var(--logo-estetoscopio);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -37,6 +42,34 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@theme {
+  /* Curva sem ultrapassagem, a das skills de movimento. */
+  --ease-suave: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Batimento do hero: o traço se desenha uma vez e depois um pulso de luz corre
+     por ele. Os caminhos usam pathLength="1", por isso os valores vão de 0 a 1. */
+  --animate-tracar: tracar 1.8s var(--ease-suave) 0.8s both;
+  --animate-pulso: pulso 3.2s linear 2.8s infinite both;
+
+  @keyframes tracar {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes pulso {
+    from {
+      stroke-dashoffset: 0.12;
+    }
+    to {
+      stroke-dashoffset: -1;
+    }
+  }
 }
 
 /* Paleta da marca, amostrada dos prints em referencias/ (parede da loja e arte
@@ -79,6 +112,12 @@
   --ring: var(--azul-vivo);
   --link: var(--azul-vivo);
   --radius: 0.75rem;
+
+  /* Logo: letras em degradê do marinho ao azul-vivo, como na original. */
+  --logo-inicio: #142a6e;
+  --logo-fim: var(--azul-vivo);
+  --logo-aparelho: #8c98b4;
+  --logo-estetoscopio: #2a9fd6;
 }
 
 /* Palco: a seção azul-marinho onde ficam as cenas 3D. O azul-vivo some no marinho
@@ -106,8 +145,10 @@
   --ring: var(--azul-claro);
   --link: var(--azul-claro);
 
-  background-color: var(--background);
-  color: var(--foreground);
+  --logo-inicio: #ffffff;
+  --logo-fim: #9cc2ff;
+  --logo-aparelho: #8597c2;
+  --logo-estetoscopio: #5cc6f2;
 }
 
 @layer base {
@@ -117,6 +158,11 @@
   body {
     @apply bg-background font-sans text-foreground;
   }
+  /* Na camada base, para que utilitários como bg-background/85 possam sobrescrever. */
+  .palco {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
   h1,
   h2,
   h3 {
@@ -124,5 +170,22 @@
   }
   p {
     text-wrap: pretty;
+  }
+}
+
+/* Entradas animadas (GSAP): o elemento nasce escondido só quando o JS existe e o
+   visitante aceita movimento; o GSAP o revela ao animar. Se o JS falhar, a
+   animação abaixo mostra o conteúdo depois de 2,5 s. Sem JS, ou com
+   prefers-reduced-motion, nada fica escondido. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-animacao="entrada"] {
+    visibility: hidden;
+    animation: mostrar-sem-js 0s 2.5s forwards;
+  }
+}
+
+@keyframes mostrar-sem-js {
+  to {
+    visibility: visible;
   }
 }
